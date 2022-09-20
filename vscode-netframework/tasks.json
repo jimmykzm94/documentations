@@ -1,0 +1,32 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "msbuild",
+            "type": "process",
+            "args": [
+                "${workspaceFolder}/APPLICATION.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish",
+            "command": "msbuild",
+            "type": "process",
+            "args": [
+                "${workspaceFolder}/APPLICATION.csproj",
+                "-p:Configuration=Release"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Launch VS IDE",
+            "command": "PATH-TO-YOUR-VS",
+            "type": "shell",
+            "args": [
+                "${workspaceFolder}/APPLICATION.sln"
+            ]
+        }
+    ]
+}

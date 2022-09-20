@@ -1,0 +1,37 @@
+This explains how to build, debug, deploy .NET Framework x64 app using VS Code, powered by OmniSharp. Note that x86 app is not supported in this platform.
+You can modify your application directly through VS Code. This works pretty well for console app.
+However, WPF app is a little bit tricky, I will talk about it for more detail at below.
+
+Software required:
+1. VS IDE
+2. VS Code
+3. C# from VS Cide
+
+For starter, create app using Visual Studio(VS) IDE. In Properties, set x64 as target architecture. 
+In .csproj, set <DebugType> as "portable" in order to debug application through VS Code debugger.
+Optionally, set <DebugType> as "none" for release build so .pdb file will not be created.
+
+Copy launch.json and task.json to your .vscode folder, modify them if necessary.
+What do these files do:
+1. launch.json
+Using debug feature in VS Code, you can build and run the application. Put breakpoint in .cs file to debug your application.
+
+2. task.json
+Please include "msbuild" command in your path environment before using it.
+    a. Build app for Debug configuration
+    b. Build app for Release configuration
+    c. Launch your solution file in VS IDE
+
+WPF app
+1. The IntelliSense is not working for XAML, so it will raise error message if accessing UI components in CS file. Use IDE instead.
+2. Add assembly reference (DLL or nuget library)
+   Do this in IDE, or modify in .csproj (a hack!)
+   eg.
+    <ItemGroup>
+        <PackageReference Include="Newtonsoft.Json">
+        <Version>13.0.1</Version>
+        </PackageReference>
+    </ItemGroup>
+3. Add new class
+   Do this in IDE, or copy <Compile Include=".cs" /> inside <ItemGroup> with CS files in .csproj (a hack!)
+   
